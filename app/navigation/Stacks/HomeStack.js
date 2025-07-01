@@ -1,21 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from '../../screen/HomeScreen';
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import HomeStackScreen from '../../screen/HomeScreen/HomeStackScreen/index.js';
+import CustomizeDrawer from '../../screen/HomeScreen/CustomizeDrawer/index.js';
 
-const Stack =createNativeStackNavigator();
+
+const Drawer = createDrawerNavigator();
+
 const HomeStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-       <Stack.Screen 
-       
-       name='HomeScreen'
-       component={HomeScreen}
-       options={{title:"Home"}}/>
-    </Stack.Navigator>
-  )
-}
+    <Drawer.Navigator
+      drawerContent={props => <CustomizeDrawer {...props} />}
+      screenOptions={{headerShown: false}}>
+      <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
+    </Drawer.Navigator>
+  );
+};
 
-export default HomeStack
+export default HomeStack;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -16,8 +16,11 @@ import OnbordScreenb from '../screen/OnbordScreen/OnScreenB';
 import OnbordScreena from '../screen/OnbordScreen/OnScreenA';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainTabNavigation from './MainTabNavigation';
-import Items from '../screen/HomeScreen/Items';
-import Vieww from '../screen/HomeScreen/view';
+import Visit from '../screen/HomeScreen/CustomItems/visit';
+import CategoriesScreen from '../screen/HomeScreen/CategoriesScreen';
+import VisitScreen from '../screen/HomeScreen/VisitScreen';
+import PlaceDetailScreen from '../screen/HomeScreen/PlaceDetailScreen';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +29,7 @@ const RootNavigator = () => {
    
     <View style = {styles.container}>
       <Stack.Navigator screenOptions={{headerShown:false}}>
-    <Stack.Screen name='Splash' component={SplashScreen}/>
+    {/* <Stack.Screen name='Splash' component={SplashScreen}/>
     <Stack.Screen name='Onbord' component={OnbordScreen}/>
     <Stack.Screen name='Onborda' component={OnbordScreena}/>
     <Stack.Screen name='Onbordb' component={OnbordScreenb}/>
@@ -35,9 +38,12 @@ const RootNavigator = () => {
     <Stack.Screen name='Login' component={LoginScreen}/>
     <Stack.Screen name='Congratulation' component={ConScreen}/>
     <Stack.Screen name='Forget' component={ForgetScreen}/>
-    <Stack.Screen name='Reset' component={ResetScreen}/>
+    <Stack.Screen name='Reset' component={ResetScreen}/> */}
      <Stack.Screen name='Main' component={MainTabNavigation}/>
-    {/* <Stack.Screen name='View' component={Vieww}/> */}
+     
+     {/* <Stack.Screen name='visit' component={Visit}/> */}
+     
+    
     
    
     

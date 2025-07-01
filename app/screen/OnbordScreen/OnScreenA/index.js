@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BordImg1 from '../../../assets/images/onbord1.png'
@@ -28,7 +28,8 @@ const OnbordScreena = ({ navigation }) => {
 
       <View style={styles.footer}>
         <Image style={styles.slider} source={Slid1} />
-        <Image style={styles.nextBtn} source={On1} />
+        <TouchableOpacity onPress={() => navigation.navigate('Onbordb')}><Image  style={styles.nextBtn} source={On1}  /></TouchableOpacity>
+        
       </View>
     </SafeAreaView>
   );

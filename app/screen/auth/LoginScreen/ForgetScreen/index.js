@@ -7,43 +7,71 @@ import {
   View,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Forg from '../../../../assets/images/forgot.png';
 import color from '../../../../../constant/color';
 import Button from '../../LoginScreen/Button';
 
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+
 const ForgetScreen = ({navigation}) => {
-  const [number, setNumber] = useState('');
+  const validationSchema = Yup.object().shape({
+    number: Yup.string()
+      .required('Mobile number is required')
+      .matches(/^\d{10}$/, 'Mobile number must be exactly 10 digits'),
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <AntDesign name="leftcircle" size={24} color="black" />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <AntDesign name="leftcircle" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.text}>Forgot</Text>
       </View>
-      <View style={styles.content}>
-        <Image style={styles.img} source={Forg} />
-        <Text style={styles.title}>Forgot Password?</Text>
-        <Text style={styles.description}>
-          Don’t worry! it happens. Please enter phone number associated with
-          your account
-        </Text>
-        <Text style={styles.name}>Enter Your Mobile Number</Text>
-        <TextInput
-          style={styles.input}
-          value={number}
-          onChangeText={setNumber}
-          keyboardType="numeric"
-          maxLength={10}
-          placeholder="+91 123456789"
-        />
-        <View>
-          <Button
-            text={'Send OTP Code'}
-            onPress={() => navigation.navigate('Otp',{ from: 'Forget' })}
-          />
-        </View>
-      </View>
+
+      <Formik
+        initialValues={{number: ''}}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          navigation.navigate('Otp', {from: 'Forget'});
+        }}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.content}>
+            <Image style={styles.img} source={Forg} />
+            <Text style={styles.title}>Forgot Password?</Text>
+            <Text style={styles.description}>
+              Don’t worry! it happens. Please enter phone number associated with
+              your account
+            </Text>
+
+            <Text style={styles.name}>Enter Your Mobile Number</Text>
+            <TextInput
+              style={styles.input}
+              value={values.number}
+              onChangeText={handleChange('number')}
+              onBlur={handleBlur('number')}
+              keyboardType="numeric"
+              maxLength={10}
+              placeholder="+91 123456789"
+            />
+            {touched.number && errors.number && (
+              <Text style={styles.errorText}>{errors.number}</Text>
+            )}
+
+            <Button text={'Send OTP Code'} onPress={handleSubmit} />
+          </View>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };
@@ -96,12 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: color.text,
   },
-  number: {
-    fontSize: 15,
-    paddingTop: 5,
-    alignSelf: 'center',
-    fontWeight: '600',
-  },
+  
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -119,5 +142,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 25,
+  },
+  errorText: {
+    color: 'red',
+    marginLeft: 30,
+    marginTop: 5,
+    fontSize: 14,
   },
 });

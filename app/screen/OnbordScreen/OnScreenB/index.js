@@ -1,18 +1,19 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import BordImg2 from '../../../assets/images/onbord2.png';
 import Slid2 from '../../../assets/images/slid2.png';
 import On2 from '../../../assets/images/on2.png';
 import color from '../../../../constant/color';
 
-
-const OnbordScreenb = ({ navigation }) => {
+const OnbordScreenb = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.skipContainer}>
-        <Text style={styles.skipText} onPress={() => navigation.navigate('Signup')}>
+        <Text
+          style={styles.skipText}
+          onPress={() => navigation.navigate('Signup')}>
           SKIP
         </Text>
       </View>
@@ -21,14 +22,17 @@ const OnbordScreenb = ({ navigation }) => {
         <Image style={styles.mainImage} source={BordImg2} />
         <Text style={styles.title}>Plan Your Dream Trip With Tourplace</Text>
         <Text style={styles.description}>
-          Lorem ipsum dolor sit amet consectetur. Mi ultricies ultrices fermentum
-          a. Duis neque lectus pharetra ac sed lorem
+          Lorem ipsum dolor sit amet consectetur. Mi ultricies ultrices
+          fermentum a. Duis neque lectus pharetra ac sed lorem
         </Text>
       </View>
 
       <View style={styles.footer}>
         <Image style={styles.slider} source={Slid2} />
-        <Image style={styles.nextBtn} source={On2} />
+        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+      
+          <Image style={styles.nextBtn} source={On2} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
