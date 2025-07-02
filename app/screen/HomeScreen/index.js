@@ -24,20 +24,27 @@ import Vieww from './CustomItems/view';
 import Services from './CustomItems/service';
 import Events from './CustomItems/events';
 import Camping from './CustomItems/camp';
-import { addItem } from '../../ReduxToolkit/Saveitem';
+import { addItem, removeItem } from '../../ReduxToolkit/Saveitem';
 import { useDispatch, useSelector } from 'react-redux';
 
 const HomeScreen = ({navigation}) => {
   const [selectedId, setSelectedId] = useState(null);
   const [color, setColor] = useState(null);
   const dispatch = useDispatch();
+
  const addedItems = useSelector(state => state.savedItems);
+ console.log('Added Items:', addedItems);
+ const removedItems = useSelector(state => state.savedItems);
+ console.log('Removed Items:', removedItems);
 
 const handleAddItem = (item) => {
   dispatch(addItem(item));
   setColor(item.id);
 };
-  
+const handleRemoveItem = (item) => {
+  dispatch(removeItem(item));
+  setColor(null);
+};
 
   return (
     <FlatList
@@ -165,7 +172,7 @@ const handleAddItem = (item) => {
                   title={item.title}
                   location={item.location}
                   isActive={color === item.id}
-                  onPress={() => handleAddItem(item)}
+                  onPress={() => color === item.id ? handleRemoveItem(item) : handleAddItem(item)}
                 />
               )}
               ItemSeparatorComponent={() => <View style={{width: 8}} />}

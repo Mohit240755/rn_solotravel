@@ -7,8 +7,14 @@ const SavedItem = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
+      const existingItem = state.find(item => item.id === action.payload.id);
+      if (!existingItem) {
+        state.push(action.payload);
+      }
     },
     removeItem: (state, action) => {
+      const itemId = action.payload;
+      return state.filter(item => item.id !== itemId);
     },
     clearItems: () => {
       return [];
